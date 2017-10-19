@@ -1,4 +1,13 @@
+@font-face {
+    font-family: 'Comfortaa';
+    url('./Comfortaa-Regular.ttf') format('tff'),
+    font-weight: 400;
+    font-style: normal;
+}
+
 .hello {
-    color: red;
+    color: #108ee9;
+    font-family: 'Comfortaa', cursive;
     background: url('./parrot.svg');
-  }
+}
+
