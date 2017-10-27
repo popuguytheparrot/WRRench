@@ -3,4 +3,5 @@
 package-lock.json
 /dist/app.bundle.js
 /dist/
-/src/Comfortaa-Bold.ttf
+
+/src/fonts/Comfortaa-Regular.ttf
