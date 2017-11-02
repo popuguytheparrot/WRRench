@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require( 'extract-text-webpack-plugin');
 
 module.exports = {
 
@@ -29,6 +30,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'WR3',
     }),
+    new ExtractTextPlugin({
+      filename: '[id][name][contenthash:5].css',
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
@@ -49,11 +53,13 @@ module.exports = {
       },
       {
         test: /\.(css|sass|scss)$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'sass-loader' },
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'sass-loader' },
+          ],
+        }),
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
