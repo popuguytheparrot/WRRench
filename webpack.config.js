@@ -2,7 +2,16 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require( 'extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
+const cssDev = [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }];
+const cssProd = ExtractTextPlugin.extract({
+  fallback: 'style-loader',
+  use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }],
+});
+
+const cssConfig = isProd ? cssProd : cssDev;
 
 module.exports = {
 
@@ -29,9 +38,14 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'WR3',
+      template: 'app/index.ejs',
+      inject: 'body',
+      hash: true,
+      cache: true,
     }),
     new ExtractTextPlugin({
-      filename: '[id][name][contenthash:5].css',
+      filename: '[name].css',
+      disable: !isProd,
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -53,13 +67,7 @@ module.exports = {
       },
       {
         test: /\.(css|sass|scss)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader' },
-            { loader: 'sass-loader' },
-          ],
-        }),
+        use: cssConfig,
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
