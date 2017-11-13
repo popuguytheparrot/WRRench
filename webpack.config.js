@@ -22,6 +22,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    chunkFilename: 'chunk.[id].[chunkhash:8].js',
   },
 
   devtool: 'inline-source-map',
@@ -35,6 +36,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'WR3',
@@ -49,6 +51,33 @@ module.exports = {
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      minChunks: 2,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      parallel: 4,
+      sourceMap: true,
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        conditionals: true,
+        unused: true,
+        comparisons: true,
+        sequences: true,
+        dead_code: true,
+        evaluate: true,
+        if_return: true,
+        join_vars: true,
+      },
+      output: {
+        comments: false,
+      },
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
 
   module: {
