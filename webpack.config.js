@@ -14,6 +14,8 @@ const images = require('./webpack/images');
 const uglifyJS = require('./webpack/js.uglify');
 const sass = require('./webpack/sass');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const PATHS = {
   source: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
@@ -57,9 +59,8 @@ const common = merge([
   images(),
 ]);
 
-module.exports = env =>
-  (env === 'production' ?
+module.exports = () =>
+  (isProd ?
     merge([common, extractCSS(), uglifyJS()])
     :
     merge([common, devServer(), sass(), css()]));
-

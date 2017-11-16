@@ -10,3 +10,12 @@ body {
           linear-gradient(225deg, hsla(210, 100%, 51%, 1) 10%, hsla(210, 100%, 51%, 0) 80%),
           linear-gradient(315deg, hsla(179, 66%, 74%, 1) 100%, hsla(179, 66%, 74%, 0) 70%);
 }
+
+@font-face {
+  font-family: Comfortaa;
+  src: url('../fonts/Comfortaa-Regular.ttf');
+}
+
+h1 {
+  font-family: Comfortaa, serif;
+}
