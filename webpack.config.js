@@ -1,127 +1,65 @@
 const webpack = require('webpack');
 const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const merge = require('webpack-merge');
 
-const isProd = process.env.NODE_ENV === 'production';
-const cssDev = [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }];
-const cssProd = ExtractTextPlugin.extract({
-  fallback: 'style-loader',
-  use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }],
-});
+const babel = require('./webpack/babel');
+const extractCSS = require('./webpack/css.extract');
+const css = require('./webpack/css');
+const devServer = require('./webpack/dev-server');
+const fonts = require('./webpack/fonts');
+const images = require('./webpack/images');
+const uglifyJS = require('./webpack/js.uglify');
+const sass = require('./webpack/sass');
 
-const cssConfig = isProd ? cssProd : cssDev;
+const PATHS = {
+  source: path.join(__dirname, 'src'),
+  build: path.join(__dirname, 'build'),
+};
 
-module.exports = {
+const common = merge([
+  {
+    entry: {
+      app: `${PATHS.source}/index.jsx`,
+    },
 
-  entry: {
-    app: './app/index.js',
-  },
+    output: {
+      path: PATHS.build,
+      filename: '[name].bundle.js',
+    },
 
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    chunkFilename: 'chunk.[id].[chunkhash:8].js',
-  },
+    devtool: 'cheap-module-source-map',
 
-  devtool: 'inline-source-map',
+    plugins: [
+      new webpack.NoEmitOnErrorsPlugin(),
+      new CleanWebpackPlugin(PATHS.build),
+      new HtmlWebpackPlugin({
+        title: 'WR3',
+        template: `${PATHS.source}/index.ejs`,
+        inject: 'body',
+        hash: true,
+        cache: true,
+        chunks: ['app', 'common'],
+      }),
 
-  devServer: {
-    contentBase: './dist',
-    hot: true,
-    compress: true,
-    port: 8080,
-    stats: 'errors-only',
-  },
-
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      title: 'WR3',
-      template: 'app/index.ejs',
-      inject: 'body',
-      hash: true,
-      cache: true,
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      disable: !isProd,
-    }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      children: true,
-      async: true,
-      minChunks: 2,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      parallel: 4,
-      sourceMap: true,
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      output: {
-        comments: false,
-      },
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-  ],
-
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['env', 'react', 'react-optimize', 'stage-1'],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(css|sass|scss)$/,
-        use: cssConfig,
-      },
-      {
-        test: /\.(png|svg|jpe?g|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[sha512:hash:base64:7].[ext]',
-              outputPath: 'img/',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
-      },
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'common',
+      }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
     ],
   },
-};
+  fonts(),
+  babel(),
+  images(),
+]);
+
+module.exports = env =>
+  (env === 'production' ?
+    merge([common, extractCSS(), uglifyJS()])
+    :
+    merge([common, devServer(), sass(), css()]));
+

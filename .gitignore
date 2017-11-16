@@ -1,7 +1,6 @@
 /node_modules/
 .idea/
 package-lock.json
-/dist/app.bundle.js
-/dist/
+/build/
 
-/src/fonts/Comfortaa-Regular.ttf
+/yarn.lock
