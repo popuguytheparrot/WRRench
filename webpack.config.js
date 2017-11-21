@@ -17,7 +17,7 @@ const sass = require('./webpack/sass');
 const isProd = process.env.NODE_ENV === 'production';
 
 const PATHS = {
-  source: path.join(__dirname, 'src'),
+  source: path.join(__dirname, 'source'),
   build: path.join(__dirname, 'build'),
 };
 
@@ -33,6 +33,11 @@ const common = merge([
     },
 
     devtool: 'cheap-module-source-map',
+
+    resolve: {
+      extensions: ['.js', '.jsx'],
+      modules: ['node_modules', 'source', 'app'],
+    },
 
     plugins: [
       new webpack.NoEmitOnErrorsPlugin(),
