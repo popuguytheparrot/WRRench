@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from 'components/Header';
 
-import './styles/style.scss';
-import popug from './img/pitpLpajFQU.jpg';
+import 'styles/style.scss';
 
-const App = () => [<popug />, <h1>WR3</h1>];
+const App = () => [
+  <Header />,
+];
 
 ReactDOM.render(<App />, document.getElementById('root'));
