@@ -36,23 +36,25 @@ const common = merge([
 
     resolve: {
       extensions: ['.js', '.jsx'],
-      modules: ['node_modules', 'source', 'app'],
+      modules: ['node_modules', 'app', 'source'],
     },
 
     plugins: [
       new webpack.NoEmitOnErrorsPlugin(),
       new CleanWebpackPlugin(PATHS.build),
       new HtmlWebpackPlugin({
-        title: 'WR3',
+        title: 'W3R3',
         template: `${PATHS.source}/index.ejs`,
         inject: 'body',
-        hash: true,
-        cache: true,
         chunks: ['app', 'common'],
       }),
 
       new webpack.optimize.CommonsChunkPlugin({
         name: 'common',
+        filename: 'common.[hash].js',
+        minChunks(module) {
+          return module.context && module.context.indexOf('node_modules') >= 0;
+        },
       }),
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
