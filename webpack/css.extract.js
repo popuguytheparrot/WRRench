@@ -6,6 +6,7 @@ module.exports = paths => ({
       {
         test: /\.scss$/,
         include: paths,
+        exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
           publicPath: '../',
           fallback: 'style-loader',

@@ -5,6 +5,9 @@ module.exports = () => ({
     compress: true,
     port: 8080,
     stats: 'errors-only',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
 }
 );
