@@ -1,3 +1,5 @@
+@import "header";
+@import "body";
 @font-face {
   font-family: Comfortaa;
   src: url('../fonts/Comfortaa-Regular.ttf');
@@ -7,14 +9,4 @@ body {
   margin: 0;
   padding: 0;
   font-family: Comfortaa, serif;
-
-}
-.header {
-  overflow:hidden;
-  height: 350px;
-  background:
-          linear-gradient(45deg, hsla(196, 77%, 66%, 1) 0%, hsla(196, 77%, 66%, 0) 70%),
-          linear-gradient(135deg, hsla(307, 46%, 28%, 1) 10%, hsla(307, 46%, 28%, 0) 80%),
-          linear-gradient(225deg, hsla(210, 100%, 51%, 1) 10%, hsla(210, 100%, 51%, 0) 80%),
-          linear-gradient(315deg, hsla(179, 66%, 74%, 1) 100%, hsla(179, 66%, 74%, 0) 70%);
 }
