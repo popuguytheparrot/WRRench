@@ -1,11 +1,13 @@
 .body {
+  & .libs {
   margin-top: 15px;
   display: flex;
   justify-content: space-around;
   align-items: baseline;
   text-align: center;
-  img {
-    width: 120px;
-    height: auto;
+    img {
+      width: 120px;
+      height: auto;
+    }
   }
 }
