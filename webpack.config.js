@@ -54,5 +54,11 @@ module.exports = () =>
   (isProd ?
     merge([common, extractCSS()])
     :
-    merge([common, { devtool: 'source-map' }, { plugins: new webpack.HotModuleReplacementPlugin() }, devServer(), css()])
+    merge([
+      common,
+      { devtool: 'source-map' },
+      { plugins: [new webpack.HotModuleReplacementPlugin()] },
+      devServer(),
+      css(),
+    ])
   );
