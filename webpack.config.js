@@ -1,73 +1,58 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 
 const babel = require('./webpack/babel');
-const extractCSS = require('./webpack/css.extract');
-const css = require('./webpack/css');
 const devServer = require('./webpack/dev-server');
 const fonts = require('./webpack/fonts');
 const images = require('./webpack/images');
-const uglifyJS = require('./webpack/js.uglify');
-const sass = require('./webpack/sass');
+const html = require('./webpack/html');
+const css = require('./webpack/css');
+const extractCSS = require('./webpack/css.extract');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const PATHS = {
-  source: path.join(__dirname, 'source'),
+const PATH = {
+  src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
 };
 
 const common = merge([
   {
     entry: {
-      app: `${PATHS.source}/index.jsx`,
+      app: ['react-hot-loader/patch', './src/index.js'],
     },
 
     output: {
-      path: PATHS.build,
+      path: PATH.build,
       filename: '[name].bundle.js',
+      publicPath: '/',
     },
-
-    devtool: 'cheap-module-source-map',
 
     resolve: {
       extensions: ['.js', '.jsx'],
-      modules: ['node_modules', 'app', 'source'],
+      modules: ['node_modules'],
     },
 
     plugins: [
-      new webpack.NoEmitOnErrorsPlugin(),
-      new CleanWebpackPlugin(PATHS.build),
-      new HtmlWebpackPlugin({
-        title: 'W3R3',
-        template: `${PATHS.source}/index.ejs`,
-        inject: 'body',
-        chunks: ['app', 'common'],
+      new HtmlWebPackPlugin({
+        template: `${PATH.src}/index.ejs`,
+        title: 'WRRench',
+        favicon: `${PATH.src}/img/favicon.ico`,
       }),
-
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
-        filename: 'common.[hash].js',
-        minChunks(module) {
-          return module.context && module.context.indexOf('node_modules') >= 0;
-        },
-      }),
-      new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.optimize.OccurrenceOrderPlugin(),
     ],
   },
-  fonts(),
+  html(),
   babel(),
+  fonts(),
   images(),
 ]);
 
 module.exports = () =>
   (isProd ?
-    merge([common, extractCSS(), uglifyJS()])
+    merge([common, extractCSS()])
     :
-    merge([common, devServer(), sass(), css()]));
+    merge([common, { devtool: 'source-map' }, { plugins: new webpack.HotModuleReplacementPlugin() }, devServer(), css()])
+  );

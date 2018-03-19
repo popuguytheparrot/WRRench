@@ -1,10 +1,9 @@
 module.exports = () => ({
   devServer: {
-    contentBase: './build',
+    historyApiFallback: true,
     hot: true,
     compress: true,
     port: 8080,
-    stats: 'errors-only',
     headers: {
       'Access-Control-Allow-Origin': '*',
     },

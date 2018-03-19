@@ -1,4 +1,4 @@
-# webpack3-react16-redux-router
-W3R3 - webpack3-react16-redux-router
+# 🔧 WRRench
+WRRench - webpack - react and other awesome libs for development with it
 
-Установка - yarn install 
+Установка/Installation - yarn install

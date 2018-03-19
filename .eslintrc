@@ -1,10 +1,4 @@
 {
-  "extends": "airbnb",
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "paths": ["app", "source", "source/img"]
-      }
-    }
-  }
+  "parser": "babel-eslint",
+  "extends": "airbnb"
 }

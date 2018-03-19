@@ -8,7 +8,17 @@ module.exports = () => ({
           {
             loader: 'babel-loader',
             options: {
-              presets: ['env', 'react', 'react-optimize', 'stage-1'],
+              presets: [['env', {
+                targets: {
+                  node: 'current',
+                  browsers: ['last 2 versions'],
+                },
+              }], 'react', 'stage-1'],
+              env: {
+                production: {
+                  presets: ['react-optimize'],
+                },
+              },
             },
           },
         ],
