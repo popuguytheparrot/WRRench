@@ -7,7 +7,7 @@ module.exports = () => ({
           {
             loader: 'file-loader',
             options: {
-              name: '[sha512:hash:base64:7].[ext]',
+              name: '[name].[ext]',
               outputPath: 'img/',
             },
           },

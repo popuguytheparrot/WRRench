@@ -12,7 +12,7 @@ const html = require('./webpack/html');
 const css = require('./webpack/css');
 const extractCSS = require('./webpack/css.extract');
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.argv[3] === 'production';
 
 const PATH = {
   src: path.join(__dirname, 'src'),
@@ -22,18 +22,22 @@ const PATH = {
 const common = merge([
   {
     entry: {
-      app: ['react-hot-loader/patch', './src/index.js'],
+      app: ['./src/index.js'],
     },
 
     output: {
       path: PATH.build,
       filename: '[name].bundle.js',
-      publicPath: '/',
     },
 
     resolve: {
       extensions: ['.js', '.jsx'],
       modules: ['node_modules'],
+      alias: {
+        src: path.resolve(__dirname, 'src'),
+        img: path.resolve(__dirname, 'src/img'),
+        components: path.resolve(__dirname, 'components'),
+      },
     },
 
     plugins: [
@@ -51,14 +55,12 @@ const common = merge([
 ]);
 
 module.exports = () =>
-  (isProd ?
-    merge([common, extractCSS()])
-    :
-    merge([
+  (isProd
+    ? merge([common, extractCSS()])
+    : merge([
       common,
       { devtool: 'source-map' },
       { plugins: [new webpack.HotModuleReplacementPlugin()] },
       devServer(),
       css(),
-    ])
-  );
+    ]));

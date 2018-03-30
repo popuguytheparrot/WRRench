@@ -4,10 +4,7 @@ module.exports = paths => ({
       {
         test: /\.css$/,
         include: paths,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
