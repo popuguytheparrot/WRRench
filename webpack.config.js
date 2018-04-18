@@ -12,7 +12,7 @@ const html = require('./webpack/html');
 const css = require('./webpack/css');
 const extractCSS = require('./webpack/css.extract');
 
-const isProd = process.argv[3] === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 
 const PATH = {
   src: path.join(__dirname, 'src'),
