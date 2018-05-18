@@ -1,12 +1,16 @@
 import React from 'react';
-import CssBaseline from 'material-ui/CssBaseline';
-import styled from 'styled-components';
-
+import styled, { injectGlobal } from 'styled-components';
 import Example from 'components/Example';
+
+injectGlobal`
+  body {
+   padding: 0;
+   margin: 0;
+  }
+`;
 
 const App = ({ className }) => (
   <div className={className}>
-    <CssBaseline />
     <Example />
   </div>
 );

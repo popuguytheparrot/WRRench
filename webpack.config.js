@@ -48,8 +48,8 @@ const common = merge([
       }),
     ],
   },
-  html(),
   babel(),
+  html(),
   fonts(),
   images(),
 ]);
@@ -63,4 +63,5 @@ module.exports = () =>
       { plugins: [new webpack.HotModuleReplacementPlugin()] },
       devServer(),
       css(),
-    ]));
+    ])
+  );

@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { lightBlue, grey } from 'material-ui/colors';
 
 const rotate360 = keyframes`
   from {
@@ -15,8 +14,8 @@ const rotate360 = keyframes`
 export const ExampleContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${lightBlue[500]};
-  color: ${grey[50]}
+  background-color: #1488CC;
+  color: #c4c4c4
 `;
 
 export const ExampleHeader = styled.div`
