@@ -15,7 +15,7 @@ export const ExampleContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: #1488CC;
-  color: #c4c4c4
+  color: #fff
 `;
 
 export const ExampleHeader = styled.div`

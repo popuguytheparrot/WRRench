@@ -10,7 +10,7 @@ module.exports = () => ({
             options: {
               presets: [
                 [
-                  'env',
+                  '@babel/env',
                   {
                     targets: {
                       node: 'current',
@@ -18,12 +18,12 @@ module.exports = () => ({
                     },
                   },
                 ],
-                'react',
-                'stage-1',
+                '@babel/react',
+                ['@babel/preset-stage-1', { decoratorsLegacy: true, pipelineProposal: "minimal" }],
               ],
               env: {
                 production: {
-                  presets: ['react-optimize'],
+                  presets: [],
                 },
               },
             },

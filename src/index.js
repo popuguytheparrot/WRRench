@@ -1,15 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from '@reach/router';
 
 import App from '../app/App';
 
-render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById('root'),
-);
+render(<App />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();
