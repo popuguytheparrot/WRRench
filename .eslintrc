@@ -1,15 +1,18 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": ["airbnb","plugin:prettier/recommended"],
+  "plugins": ["import", "jsx-a11y", "react"],
   "parserOptions": {
     "sourceType": "module",
+    "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true
     }
   },
   "env": {
     "es6": true,
-    "node": true
+    "node": true,
+    "browser: true,
   },
   "settings": {
     "import/resolver": {
@@ -19,6 +22,6 @@
     }
   },
   "rules": {
-
+    "prettier/prettier": "error"
   }
 }
