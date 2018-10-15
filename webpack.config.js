@@ -28,11 +28,13 @@ const common = merge([
 
     output: {
       path: PATH.build,
-      filename: '[name].bundle.[hash].js',
+      filename: 'bundle.[hash].js',
+      chunkFilename: '[name].chunk.[hash].js',
+      publicPath: '/'
     },
 
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx','.json'],
       modules: ['node_modules'],
       alias: {
         app: path.resolve(__dirname, 'app'),
@@ -71,8 +73,16 @@ module.exports = () => (isProd
   ])
   : merge([
     common,
-    { devtool: 'source-map' },
-    { plugins: [new webpack.HotModuleReplacementPlugin()] },
+        {
+          devtool: 'cheap-module-source-map',
+          optimization: {
+            namedModules: true
+          },
+          performance: {
+            hints: false
+          },
+          plugins: [new webpack.HotModuleReplacementPlugin()]
+        },
     devServer(),
   ])
 );
