@@ -18,7 +18,7 @@ WRRench - webpack - react and other awesome libs for development with it
 ```javascript 
 const fonts = require('./webpack/fonts');
 
-const images = require('./webpack/images')';
+const images = require('./webpack/images');
 
 const common = merge([
   {
