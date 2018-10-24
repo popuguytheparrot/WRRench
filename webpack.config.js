@@ -12,6 +12,7 @@ const devServer = require('./webpack/dev-server');
 const fonts = require('./webpack/fonts');
 const images = require('./webpack/images');
 const html = require('./webpack/html');
+const eslint = require('./webpack/eslint');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -55,6 +56,7 @@ const common = merge([
   html(),
   fonts(),
   images(),
+  eslint(),
 ]);
 
 module.exports = () => (isProd
