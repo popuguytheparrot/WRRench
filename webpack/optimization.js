@@ -1,7 +1,4 @@
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSsrcPlugin = require('optimize-css-assets-webpack-plugin');
-
-const cssnano = require('cssnano');
 
 module.exports = () => ({
   optimization: {
@@ -25,15 +22,6 @@ module.exports = () => ({
           mangle: true
         }
       }),
-      new OptimizeCSSsrcPlugin({
-        cssProcessor: cssnano,
-        cssProcessorOptions: {
-          discardComments: {
-            removeAll: true
-          },
-          safe: true
-        }
-      })
     ],
     splitChunks: {
       cacheGroups: {
