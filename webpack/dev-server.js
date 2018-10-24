@@ -4,6 +4,7 @@ module.exports = () => ({
     historyApiFallback: true,
     hot: true,
     compress: true,
+    overlay: true,
     port: 8080,
     publicPath: '/',
     quiet: true,
