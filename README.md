@@ -1,8 +1,11 @@
 # 🔧 WRRench
 WRRench - webpack - react and other awesome libs for development with it
 
-## Установка/Installation -
-`yarn install npm install `
+## Установка/Installation
+
+```sh
+  yarn install npm install
+```
 
 ## Использование
 В папке webpack есть модули(лоадеры) для работы со стилями, файлами и т.д.
@@ -15,6 +18,7 @@ WRRench - webpack - react and other awesome libs for development with it
 
 
 ## Пример
+
 ```javascript 
 const fonts = require('./webpack/fonts');
 
