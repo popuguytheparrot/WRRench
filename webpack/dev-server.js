@@ -7,10 +7,10 @@ module.exports = () => ({
     overlay: true,
     port: 8080,
     publicPath: '/',
-    quiet: true,
+    // quiet: true,
     clientLogLevel: 'error',
     headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-  },
+      'Access-Control-Allow-Origin': '*'
+    }
+  }
 });

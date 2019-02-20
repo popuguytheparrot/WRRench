@@ -1,8 +1,8 @@
 import React from 'react';
-import styled, { injectGlobal } from 'styled-components';
-import Example from 'components/Example';
+import styled, { createGlobalStyle } from 'styled-components';
+import { Example } from 'components/Example';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   body {
    padding: 0;
    margin: 0;
@@ -11,6 +11,7 @@ injectGlobal`
 
 const App = ({ className }) => (
   <div className={className}>
+    <GlobalStyle />
     <Example />
   </div>
 );

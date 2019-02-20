@@ -5,11 +5,9 @@ const devMode = process.env.NODE_ENV !== 'production';
 module.exports = () => ({
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+    })
   ],
   module: {
     rules: [
@@ -19,9 +17,9 @@ module.exports = () => ({
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader',
-        ],
-      },
-    ],
-  },
+          'sass-loader'
+        ]
+      }
+    ]
+  }
 });
