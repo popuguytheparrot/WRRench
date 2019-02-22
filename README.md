@@ -24,11 +24,13 @@ const fonts = require('./webpack/fonts');
 
 const images = require('./webpack/images');
 
-const common = merge([
-  {
-    ... // общие параметры конфига
-    fonts(),
-    images(),
+
+const rules = [fonts(), images()]
+
+// общие параметры конфига
+const common =  {
+    //... 
+    rules
   }
 ])
 ```
