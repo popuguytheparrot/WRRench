@@ -7,7 +7,6 @@ module.exports = () => ({
       options: {
         plugins: [
           '@babel/plugin-proposal-class-properties',
-          '@babel/plugin-proposal-export-default-from',
           '@babel/plugin-syntax-dynamic-import',
           '@babel/plugin-proposal-export-namespace-from'
         ],
@@ -19,7 +18,7 @@ module.exports = () => ({
               modules: false,
               targets: {
                 node: 'current',
-                browsers: ['last 2 versions']
+                browsers: ['last 1 versions']
               }
             }
           ],
