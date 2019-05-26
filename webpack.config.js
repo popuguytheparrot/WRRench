@@ -38,7 +38,7 @@ const common = {
     path: PATH.build,
     filename: 'bundle.[hash].js',
     chunkFilename: '[name].chunk.[hash].js',
-    publicPath: '/'
+    publicPath: 'WRRench'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
