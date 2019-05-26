@@ -1,5 +1,9 @@
 language: node_js
-node_js: node
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
 
 before_deploy:
   - npm run prod
@@ -9,5 +13,6 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
+  local_dir: build
   on:
     branch: master
