@@ -5,12 +5,6 @@ module.exports = () => ({
     {
       loader: 'babel-loader',
       options: {
-        plugins: [
-          '@babel/plugin-proposal-class-properties',
-          '@babel/plugin-proposal-export-default-from',
-          '@babel/plugin-syntax-dynamic-import',
-          '@babel/plugin-proposal-export-namespace-from'
-        ],
         presets: [
           [
             '@babel/preset-env',
