@@ -9,14 +9,6 @@ module.exports = () => ({
         extractComments: true
       })
     ],
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all'
-        }
-      }
-    }
+    splitChunks: { chunks: 'all' }
   }
 });
