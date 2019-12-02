@@ -1,4 +1,5 @@
-const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { join, resolve } = require('path');
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -16,8 +17,8 @@ const eslint = require('./webpack/eslint');
 const isProd = process.env.NODE_ENV === 'production';
 
 const PATH = {
-  src: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'build')
+  src: join(__dirname, 'src'),
+  build: join(__dirname, 'build')
 };
 
 const plugins = [
@@ -31,22 +32,14 @@ const plugins = [
 const rules = [babel(), html(), fonts(), images(), eslint()];
 
 const common = {
-  entry: {
-    app: ['./src/index.js']
-  },
-  output: {
-    path: PATH.build,
-    filename: 'bundle.[hash].js',
-    chunkFilename: '[name].chunk.[hash].js',
-    publicPath: '/'
-  },
+  mode: process.env.NODE_ENV,
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
-      app: path.resolve(__dirname, 'app'),
-      components: path.resolve(__dirname, 'components'),
-      src: path.resolve(__dirname, 'src')
+      app: resolve(__dirname, 'app'),
+      components: resolve(__dirname, 'components'),
+      src: resolve(__dirname, 'src')
     }
   },
   module: {
@@ -61,7 +54,7 @@ const devConf = merge([
   {
     devtool: 'cheap-module-source-map',
     optimization: {
-      namedModules: true
+      moduleIds: 'named'
     },
     performance: {
       hints: false
