@@ -13,18 +13,18 @@ module.exports = () => ({
               modules: false,
               targets: {
                 node: 'current',
-                browsers: ['last 2 versions']
-              }
-            }
+                browsers: ['last 2 versions'],
+              },
+            },
           ],
-          '@babel/preset-react'
+          '@babel/preset-react',
         ],
         env: {
           production: {
-            presets: []
-          }
-        }
-      }
-    }
-  ]
+            presets: [],
+          },
+        },
+      },
+    },
+  ],
 });

@@ -1,6 +1,6 @@
 module.exports = () => ({
   devServer: {
-    contentBase: ['./src/img'],
+    contentBase: ['./src/public'],
     historyApiFallback: true,
     hot: true,
     compress: true,
@@ -10,7 +10,7 @@ module.exports = () => ({
     // quiet: true,
     clientLogLevel: 'error',
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
 });

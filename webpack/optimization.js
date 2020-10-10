@@ -6,9 +6,9 @@ module.exports = () => ({
       new TerserPlugin({
         cache: true,
         parallel: true,
-        extractComments: true
-      })
+        extractComments: true,
+      }),
     ],
-    splitChunks: { chunks: 'all' }
-  }
+    splitChunks: { chunks: 'all' },
+  },
 });

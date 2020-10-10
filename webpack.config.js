@@ -1,8 +1,7 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { join, resolve } = require('path');
 
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
@@ -18,15 +17,15 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const PATH = {
   src: join(__dirname, 'src'),
-  build: join(__dirname, 'build')
+  build: join(__dirname, 'build'),
 };
 
 const plugins = [
   new HtmlWebPackPlugin({
     template: `${PATH.src}/index.ejs`,
     title: 'WRRench',
-    favicon: `${PATH.src}/img/favicon.ico`
-  })
+    favicon: `${PATH.src}/public/favicon.ico`,
+  }),
 ];
 
 const rules = [babel(), html(), fonts(), images(), eslint()];
@@ -39,13 +38,13 @@ const common = {
     alias: {
       app: resolve(__dirname, 'app'),
       components: resolve(__dirname, 'components'),
-      src: resolve(__dirname, 'src')
-    }
+      src: resolve(__dirname, 'src'),
+    },
   },
   module: {
-    rules
+    rules,
   },
-  plugins
+  plugins,
 };
 
 const prodConf = merge([common, optimization()]);
@@ -54,14 +53,14 @@ const devConf = merge([
   {
     devtool: 'cheap-module-source-map',
     optimization: {
-      moduleIds: 'named'
+      moduleIds: 'named',
     },
     performance: {
-      hints: false
+      hints: false,
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()]
+    plugins: [new webpack.HotModuleReplacementPlugin()],
   },
-  devServer()
+  devServer(),
 ]);
 
 module.exports = () => (isProd ? prodConf : devConf);

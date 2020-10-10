@@ -6,8 +6,8 @@ module.exports = () => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[contenthash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css'
-    })
+      chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
+    }),
   ],
   module: {
     rules: [
@@ -17,9 +17,9 @@ module.exports = () => ({
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
-      }
-    ]
-  }
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 });

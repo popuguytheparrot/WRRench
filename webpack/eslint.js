@@ -7,8 +7,8 @@ module.exports = () => ({
       loader: 'eslint-loader',
       options: {
         configFile: `./.eslintrc`,
-        emitWarning: true
-      }
-    }
-  ]
+        emitWarning: true,
+      },
+    },
+  ],
 });

@@ -6,8 +6,8 @@ module.exports = () => ({
       options: {
         name: '[name].[ext]',
         publicPath: 'fonts/',
-        outputPath: 'fonts/'
-      }
-    }
-  ]
+        outputPath: 'fonts/',
+      },
+    },
+  ],
 });

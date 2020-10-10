@@ -1,4 +1,4 @@
-module.exports = paths => ({
+module.exports = (paths) => ({
   test: /\.(sa|sc|c)ss$/,
   include: paths,
   use: [
@@ -8,9 +8,9 @@ module.exports = paths => ({
       options: {
         importLoaders: 1,
         modules: true,
-        localIdentName: '[folder]__[local]--[hash:base64:5]'
-      }
+        localIdentName: '[folder]__[local]--[contenthash:base64:5]',
+      },
     },
-    'sass-loader'
-  ]
+    'sass-loader',
+  ],
 });

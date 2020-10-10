@@ -10,22 +10,22 @@ const rotate360 = keyframes`
   }
 `;
 
-export const ExampleContainer = styled.div`
+export const ExampleHeader = styled.header`
   display: flex;
   justify-content: center;
   background-color: #1488cc;
   color: #fff;
 `;
 
-export const ExampleHeader = styled.div`
-  > h1 > div {
+export const Logo = styled.span`
+   {
     display: inline-block;
     animation: ${rotate360} 2s linear infinite;
     padding: 2rem 1rem;
   }
 `;
 
-export const ExampleContent = styled.div`
+export const ExampleContent = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
