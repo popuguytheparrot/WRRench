@@ -4,7 +4,6 @@ module.exports = () => ({
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
         extractComments: true,
       }),
